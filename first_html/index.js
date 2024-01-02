@@ -1,12 +1,20 @@
 
-let num = 1;
+// create a nums object that stores numbers
+let nums = {
+    num1: 1,
+    num2: 2
+};
 
-let num2 = num + 3;
+// add one to num1 and display it until it reached 10
+while (nums.num1 < 10)
+console.log(nums.num1),
+nums.num1 += 1;
 
-while (num < 10)
-console.log(num),
-num += 1,
-console.log(num);
+// create an array of colors
+let colors = ['red', 'green', 'blue'];
+console.log(colors)
+
+
 
 
 
