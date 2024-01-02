@@ -14,8 +14,12 @@ nums.num1 += 1;
 let colors = ['red', 'green', 'blue'];
 console.log(colors)
 
+function count(){
+    nums.num2 += 1
+    console.log(nums.num2);
+}
 
-
+count();
 
 
 
