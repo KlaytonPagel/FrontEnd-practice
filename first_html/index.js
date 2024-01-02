@@ -7,7 +7,6 @@ let nums = {
 
 // add one to num1 and display it until it reached 10
 while (nums.num1 < 10)
-document.getElementById('heading').innerHTML = nums.num1,
 console.log(nums.num1),
 nums.num1 += 1;
 
@@ -22,5 +21,7 @@ function count(){
 
 count();
 
-
-
+document.getElementById('nameButton').onclick = function (){
+    let name = document.getElementById('name').value;
+    document.getElementById('displayName').innerHTML = name;
+}
