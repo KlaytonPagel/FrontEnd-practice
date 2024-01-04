@@ -23,5 +23,10 @@ count();
 
 document.getElementById('nameButton').onclick = function (){
     let name = document.getElementById('name').value;
-    document.getElementById('displayName').innerHTML = name;
+    if (name == 'Klayton') {
+        document.getElementById('displayName').innerHTML = 'welcome back ' + name;
+    }
+    else {
+        document.getElementById('displayName').innerHTML = name;
+    }
 }
