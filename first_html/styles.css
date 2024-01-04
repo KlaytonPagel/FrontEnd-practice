@@ -5,3 +5,13 @@ p.css {font-weight: bold; color: blue}
 a.link {font-size: 30px}
 p.displayName {font-size: 50px; color: chocolate}
 b.buttons {background: #646464}
+#kowantifyButton {
+    border-radius: 50%;
+    background-image: url('https://kowantify.com/wp-content/uploads/2024/01/Kowalski_logo__1_noname-300x225.png');
+    background-size: cover;
+    padding: 65px 65px;
+    transition-duration: 500ms}
+
+#kowantifyButton:hover {
+    background-image: url('https://kowantify.com/wp-content/uploads/2024/01/square_logo.png')
+}

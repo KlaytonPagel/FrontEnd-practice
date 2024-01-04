@@ -1,6 +1,7 @@
 let currentMode = 'light';
 let modeButton = document.querySelector('#modeButton')
 let intervalButton = document.querySelector('#intervalButton')
+let kowantifyButton = document.querySelector('#kowantifyButton')
 let intervalState = 'off'
 let interval;
 let text = document.getElementsByClassName('text')
@@ -8,6 +9,7 @@ let buttons = document.getElementsByClassName('buttons')
 
 modeButton.onclick = changeStyleMode;
 intervalButton.onclick = toggleInterval;
+kowantifyButton.onclick = function () {window.open('https://kowantify.com');}
 
 function changeStyleMode() {
     if (currentMode === 'dark'){
