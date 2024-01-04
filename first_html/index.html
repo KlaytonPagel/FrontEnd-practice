@@ -3,33 +3,16 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images/slash_first.png" type="image/x-icon">
+        <link rel="stylesheet" href="styles.css">
         <title>Vorpal Dive</title>
-
-        <style>
-            h1 {font-size: 50px}
-            body {background: #a494cb}
-            p.css {font-weight: bold; color: blue}
-            a.link {font-size: 30px}
-            p.displayName {font-size: 50px; color: chocolate}
-        </style>
 
     </head>
     <body>
-        <h1>Some Basic Web Development Practice</h1>
-            <h2>HTML</h2>
-                <p>HTML lets you format and create web page</p>
-            <h2>CSS</h2>
-                <p class="css">CSS lets you change the style of your web page</p>
-            <h2>You can also add links that lead to other web pages</h2>
-                <a href="second.html" class="link">For example this takes you to another page</a>
-                <h3>You can make links that go to other websites as well</h3>
-                    <a href="http://vorpal.kowantify.com" class="link">Vorpal Dive game on kowantify.com</a><br>
-                    <label> Name Please</label><br>
-                    <input type="text" id="name">
-                    <button id="nameButton">Name button</button><br>
-                    <p id="displayName", class="displayName"></p>
-                    <a href="http://klaytonpagel.github.io" class="link">Vorpal Dive game on my github site</a>
-                    <img src="" alt="">
-        <script src="index.js"></script>
+        <h1 class="text">Some Basic Web Development Practice</h1>
+        <button class="buttons" id="modeButton">Change to dark mode</button>
+        <button class="buttons" id="intervalButton">Don't press this</button>
+
+        <script src="./index.js"></script>
     </body>
 </html>

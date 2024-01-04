@@ -1,32 +1,47 @@
+let currentMode = 'light';
+let modeButton = document.querySelector('#modeButton')
+let intervalButton = document.querySelector('#intervalButton')
+let intervalState = 'off'
+let interval;
+let text = document.getElementsByClassName('text')
+let buttons = document.getElementsByClassName('buttons')
 
-// create a nums object that stores numbers
-let nums = {
-    num1: 1,
-    num2: 2
-};
+modeButton.onclick = changeStyleMode;
+intervalButton.onclick = toggleInterval;
 
-// add one to num1 and display it until it reached 10
-while (nums.num1 < 10)
-console.log(nums.num1),
-nums.num1 += 1;
-
-// create an array of colors
-let colors = ['red', 'green', 'blue'];
-console.log(colors)
-
-function count(){
-    nums.num2 += 1
-    console.log(nums.num2);
+function changeStyleMode() {
+    if (currentMode === 'dark'){
+        document.body.style.background = "#ffffff";
+        currentMode = "light";
+        for (let i = 0; i < text.length; i++) {
+            text[i].style.color = "#000000";
+        }
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.background = "#646464";
+            buttons[i].style.color = "#ffffff";
+        }
+    }
+    else if (currentMode === 'light') {
+        currentMode = 'dark';
+        document.body.style.background = "#27252a";
+        for (let i = 0; i < text.length; i++) {
+            text[i].style.color = "#ffffff";
+        }
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.background = "#ffffff";
+            buttons[i].style.color = "#000000";
+        }
+    }
 }
-
-count();
-
-document.getElementById('nameButton').onclick = function (){
-    let name = document.getElementById('name').value;
-    if (name == 'Klayton') {
-        document.getElementById('displayName').innerHTML = 'welcome back ' + name;
+function toggleInterval() {
+    if (intervalState === 'off'){
+        intervalState = 'on'
+        interval = setInterval(changeStyleMode, 50)
     }
     else {
-        document.getElementById('displayName').innerHTML = name;
+        intervalState = 'off'
+        clearTimeout(interval)
+        currentMode = 'light'
+        changeStyleMode()
     }
 }
