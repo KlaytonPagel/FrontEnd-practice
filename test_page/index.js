@@ -23,9 +23,11 @@ stoneButton.onclick = function () {window.open('https://store.kowantify.com/chec
 
 function changeStyleMode(first = false) {
     if (currentMode === 'dark'){
+        document.body.style.transitionDuration = '500ms'
         document.body.style.background = "#ffffff";
         currentMode = "light";
         localStorage.setItem('themeMode', 'light')
+        modeButton.innerHTML = 'Change to dark mode'
         for (let i = 0; i < text.length; i++) {
             text[i].style.color = "#000000";
         }
@@ -38,6 +40,7 @@ function changeStyleMode(first = false) {
         currentMode = 'dark';
         document.body.style.background = "#27252a";
         localStorage.setItem('themeMode', 'dark')
+        modeButton.innerHTML = 'Change to light mode'
         for (let i = 0; i < text.length; i++) {
             text[i].style.color = "#ffffff";
         }
