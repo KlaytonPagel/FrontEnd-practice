@@ -1,9 +1,6 @@
 h1 {font-size: 50px}
 body {background: #ffffff; transition-duration: 500ms;}
-p.css {font-weight: bold; color: blue}
-a.link {font-size: 30px}
-p.displayName {font-size: 50px; color: chocolate}
-.buttons {background: #646464; color: #ffffff; display: block; transition-duration: 500ms; margin-bottom: 10px;}
+.buttons {background: #6e6868; color: #ffffff; display: block; transition-duration: 500ms; margin-bottom: 10px;}
 .serverTypes {display: flex; flex-wrap: wrap}
 .kowantifyButtons {
     border-radius: 20%;
