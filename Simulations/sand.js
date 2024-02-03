@@ -1,12 +1,12 @@
 // Set up canvas________________________________________________________________________________________________________
 screen = document.getElementById("screen");
 pen = screen.getContext("2d");
-let width  = window.innerWidth;
-let height  = window.innerHeight;
+let width  = window.innerWidth - 15;
+let height  = window.innerHeight - 20;
 screen.width = width;
-screen.height = height - 40;
+screen.height = height;
 
-const tileSize = 32; // The size of each piece of sand
+const tileSize = 8; // The size of each piece of sand
 const rowCount = Math.floor(height / tileSize);
 const colCount = Math.floor(width / tileSize);
 
@@ -41,7 +41,7 @@ function addSand(event){
     mouseY = event.offsetY;
     let sandX = Math.floor(mouseX / tileSize) * tileSize;
     let sandY = Math.floor(mouseY / tileSize) * tileSize;
-    sand.push([sandX, sandY, tileSize, tileSize, 1])
+    sand.push([sandX, sandY, tileSize, tileSize, 1, false])
 }
 
 // Draw all sand________________________________________________________________________________________________________
@@ -56,8 +56,13 @@ function drawSand(){
 
 // Sets the sands movement speed________________________________________________________________________________________
 function sandSpeed(data){
+    // if the sand has reached it's final spot don't check if it can move
+    if (data[5] === true){
+        return 0;
+    }
     let move = checkBelow(data);
     if (move ===  false) {
+        data[5] = true;
         return 0
     } else if (move === "down"){
         data[4] += 0
@@ -108,8 +113,15 @@ function checkSides(data){
         return false;
     } else if (blockedSides[0] === true){
         return "left";
-    } else {
+    } else if (blockedSides[1] === true){
         return "right";
+    } else {
+        let choice = Math.random();
+        if (choice <= .5){
+            return "left";
+        } else if (choice > .5){
+            return "right";
+        }
     }
 }
 
@@ -120,13 +132,15 @@ function userInput(){
 
 // The main program loop________________________________________________________________________________________________
 function running(){
+    pen.beginPath()
     pen.clearRect(0, 0, width, height); // Clear the screen
     userInput()
     drawSand(); // Draws the sand the player places
     drawBoundary();// Draw a boundary around canvas
-    drawGrid(); // Draw the grid on the screen
+    //drawGrid(); // Draw the grid on the screen
 
-    setTimeout(() => {requestAnimationFrame(running) }, 1000/60)
+    // setTimeout(() => {requestAnimationFrame(running) }, 1000/60)
+    requestAnimationFrame(running)
 }
 
 running()
