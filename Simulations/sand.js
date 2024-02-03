@@ -7,18 +7,15 @@ screen.width = width;
 screen.height = height;
 
 const tileSize = 32;
-const rowCount = height / tileSize;
-const colCount = width / tileSize;
+const rowCount = Math.floor(height / tileSize);
+const colCount = Math.floor(width / tileSize);
 
 let sand = [];
 
 // Set the listener for mouse clicks____________________________________________________________________________________
-let mouseX;
-let mouseY;
+let mouseState = false;
 
-const mouse = screen.addEventListener('click', event => {
-    addSand(event.clientX - 10, event.clientY - 10);
-});
+screen.addEventListener('click', addSand);
 
 // Draw a gird on the screen____________________________________________________________________________________________
 function drawGrid(){
@@ -44,19 +41,53 @@ function drawBoundary(){
 }
 
 // Add a sand tile to an array__________________________________________________________________________________________
-function addSand(mouseX, mouseY){
+function addSand(event){
+    mouseX = event.offsetX;
+    mouseY = event.offsetY;
+    console.log(event)
     let sandX = Math.floor(mouseX / tileSize) * tileSize;
     let sandY = Math.floor(mouseY / tileSize) * tileSize;
-    sand.push([sandX, sandY, tileSize, tileSize])
+    sand.push([sandX, sandY, tileSize, tileSize, 1])
 }
 
 // Draw all sand________________________________________________________________________________________________________
 function drawSand(){
     for (let index = 0; index < sand.length; index++) {
-        data = sand[index];
-        pen.fillRect(data[0], data[1] += tileSize, data[2], data[3])
+        let data = sand[index];
+        let speed = sandSpeed(data)
+        pen.fillRect(data[0], data[1] += speed, data[2], data[3])
         pen.stroke()
     }
+}
+
+// Sets the sands movement speed________________________________________________________________________________________
+function sandSpeed(data){
+    let move = checkBelow(data);
+    if (move ===  true) {
+        data[4] += 0
+        return Math.floor(data[4]) * tileSize
+    } else {
+        return 0
+    }
+}
+
+// Checks the tile below the current sand_______________________________________________________________________________
+function checkBelow(data){
+    if (data[1] + tileSize === rowCount * tileSize){
+        return false
+    }
+    for (let index = 0; index < sand.length; index++){
+        let tile = sand[index];
+        if (data[1] + tileSize === tile[1] && data[0] === tile[0]){
+            return false;
+        }
+    }
+    return true;
+}
+
+// Checks for users input_______________________________________________________________________________________________
+function userInput(){
+
 }
 
 // The main program loop________________________________________________________________________________________________
@@ -66,7 +97,7 @@ function running(){
     drawBoundary();// Draw a boundary around canvas
     drawGrid(); // Draw the grid on the screen
 
-    setTimeout(() => {requestAnimationFrame(running) }, 1000/20)
+    setTimeout(() => {requestAnimationFrame(running) }, 1000/60)
 }
 
 running()
