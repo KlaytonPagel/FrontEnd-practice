@@ -4,18 +4,13 @@ pen = screen.getContext("2d");
 let width  = window.innerWidth;
 let height  = window.innerHeight;
 screen.width = width;
-screen.height = height;
+screen.height = height - 40;
 
-const tileSize = 32;
+const tileSize = 32; // The size of each piece of sand
 const rowCount = Math.floor(height / tileSize);
 const colCount = Math.floor(width / tileSize);
 
-let sand = [];
-
-// Set the listener for mouse clicks____________________________________________________________________________________
-let mouseState = false;
-
-screen.addEventListener('click', addSand);
+let sand = []; // Empty array to hold sand
 
 // Draw a gird on the screen____________________________________________________________________________________________
 function drawGrid(){
@@ -44,7 +39,6 @@ function drawBoundary(){
 function addSand(event){
     mouseX = event.offsetX;
     mouseY = event.offsetY;
-    console.log(event)
     let sandX = Math.floor(mouseX / tileSize) * tileSize;
     let sandY = Math.floor(mouseY / tileSize) * tileSize;
     sand.push([sandX, sandY, tileSize, tileSize, 1])
@@ -63,11 +57,19 @@ function drawSand(){
 // Sets the sands movement speed________________________________________________________________________________________
 function sandSpeed(data){
     let move = checkBelow(data);
-    if (move ===  true) {
+    if (move ===  false) {
+        return 0
+    } else if (move === "down"){
         data[4] += 0
         return Math.floor(data[4]) * tileSize
-    } else {
-        return 0
+    } else if (move === "right") {
+        data[4] += 0
+        data[0] += tileSize
+        return Math.floor(data[4]) * tileSize
+    } else if (move === "left") {
+        data[4] += 0
+        data[0] -= tileSize
+        return Math.floor(data[4]) * tileSize
     }
 }
 
@@ -79,20 +81,47 @@ function checkBelow(data){
     for (let index = 0; index < sand.length; index++){
         let tile = sand[index];
         if (data[1] + tileSize === tile[1] && data[0] === tile[0]){
-            return false;
+            return checkSides(data);
         }
     }
-    return true;
+    return "down";
+}
+
+// If the spot directly below is unavailable check down and to the side_________________________________________________
+function checkSides(data){
+    // track which sides are blocked, right / left
+    let blockedSides = [false, false]
+
+    for (let index = 0; index < sand.length; index++) {
+        let tile = sand[index];
+
+        // Right side taken
+        if ((data[1] + tileSize === tile[1] && data[0] + tileSize === tile[0])) {
+            blockedSides[0] = true;
+
+        // Left side taken
+        } else if ((data[1] + tileSize === tile[1] && data[0] - tileSize === tile[0])) {
+            blockedSides[1] = true;
+        }
+    }
+    if (blockedSides[0] === true && blockedSides[1] === true){
+        return false;
+    } else if (blockedSides[0] === true){
+        return "left";
+    } else {
+        return "right";
+    }
 }
 
 // Checks for users input_______________________________________________________________________________________________
 function userInput(){
-
+    screen.onmousedown = addSand
 }
 
 // The main program loop________________________________________________________________________________________________
 function running(){
     pen.clearRect(0, 0, width, height); // Clear the screen
+    userInput()
     drawSand(); // Draws the sand the player places
     drawBoundary();// Draw a boundary around canvas
     drawGrid(); // Draw the grid on the screen
@@ -101,4 +130,3 @@ function running(){
 }
 
 running()
-
