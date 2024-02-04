@@ -39,9 +39,13 @@ function drawBoundary(){
 function addSand(event){
     mouseX = event.offsetX;
     mouseY = event.offsetY;
-    let sandX = Math.floor(mouseX / tileSize) * tileSize;
-    let sandY = Math.floor(mouseY / tileSize) * tileSize;
-    sand.push([sandX, sandY, tileSize, tileSize, 1, false])
+    for (let num = 0; num < 4; num++) {
+        let posX = sandShower(mouseX);
+        let posY = sandShower(mouseY);
+        let sandX = Math.floor(posX / tileSize) * tileSize;
+        let sandY = Math.floor(posY / tileSize) * tileSize;
+        sand.push([sandX, sandY, tileSize, tileSize, 1, false])
+    }
 }
 
 // Draw all sand________________________________________________________________________________________________________
@@ -57,9 +61,9 @@ function drawSand(){
 // Sets the sands movement speed________________________________________________________________________________________
 function sandSpeed(data){
     // if the sand has reached it's final spot don't check if it can move
-    if (data[5] === true){
-        return 0;
-    }
+    // if (data[5] === true){
+    //     return 0;
+    // }
     let move = checkBelow(data);
     if (move ===  false) {
         data[5] = true;
@@ -123,6 +127,17 @@ function checkSides(data){
             return "right";
         }
     }
+}
+
+// Makes many sand pieces spawn around the players click point_________________________________________________________________
+function sandShower(mousePos){
+    let randPos = Math.floor(Math.random() * 10) - 5
+    if (randPos < 0) {
+        randPos += 3;
+    } else if (randPos > 0) {
+        randPos -= 3;
+    }
+    return (randPos * tileSize) + mousePos
 }
 
 // Checks for users input_______________________________________________________________________________________________
