@@ -1,10 +1,10 @@
-There has been work done on this repositry before now, I just now decided to log the main changes today
+There has been work done on this repository before now, I just now decided to log the main changes today
 
 2/2/2024
 - Started Sand Simulator
 
 I started working on a sand simulation in Java Script using the HTML Canvas tag.
-so far the simulation is fully functional, you can click to spawn sand in and it will fall until it lands on the bottom or another peice of sand.
+So far the simulation is fully functional, you can click to spawn sand in and it will fall until it lands on the bottom or another peice of sand.
 If the sand can't go staight down it will try to go dowwn and to a side, this causes it to pile up.
 
 2/3/2024
