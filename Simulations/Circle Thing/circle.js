@@ -5,12 +5,16 @@ let height = window.innerHeight - 20;
 screen.width = width;
 screen.height = height;
 
+
+// Class to run and build the whole simulation__________________________________________________________________________
 class circleThing {
+
+    // Constructor to initialize all variables and values______________________________________________________________
     constructor(pen) {
         this.pen = pen;
         this.colors = ["red", "blue", "green", "white", "orange", "yellow", "black"]
 
-        this.outerRadius = width / 3;
+        this.outerRadius = width / 5;
         this.outerX = width / 2;
         this.outerY = height / 2;
         this.outerTop = this.outerY - this.outerRadius;
@@ -28,6 +32,7 @@ class circleThing {
         console.log("created circle thing")
     }
 
+    // Draws the outer circle___________________________________________________________________________________________
     createOuterCircle() {
         this.pen.lineWidth = 5;
         this.pen. beginPath();
@@ -35,6 +40,7 @@ class circleThing {
         this.pen.stroke();
     }
 
+    // Draws the inner circle___________________________________________________________________________________________
     createInnerCircle() {
         this.pen.lineWidth = 10;
         this.pen.beginPath();
@@ -44,6 +50,7 @@ class circleThing {
         this.pen.fill();
     }
 
+    // Checks for collision between the outer nd inner circles__________________________________________________________
     checkCollision() {
         if (this.innerY + this.innerRadius > this.outerBottom) {
             this.innerDirectionY = -1;
@@ -56,6 +63,7 @@ class circleThing {
         }
     }
 
+    // Loops through an array of colors_________________________________________________________________________________
     changeColor() {
         if (this.innerColor === this.colors[this.colors.length - 1]) {
             this.innerColor = this.colors[0]
@@ -65,6 +73,7 @@ class circleThing {
         }
     }
 
+    // The main loop that makes changes and updates everything or every frame___________________________________________
     update() {
         this.checkCollision()
         this.pen.clearRect(0, 0, width, height);
@@ -75,8 +84,10 @@ class circleThing {
     }
 }
 
+// Create the simulation object
 let circ = new circleThing(pen);
 
+// Animation loop to run the simulation
 function running() {
     circ.update();
     requestAnimationFrame(running);
