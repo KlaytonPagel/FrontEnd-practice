@@ -44,7 +44,7 @@ function addSand(event){
         let posY = sandShower(mouseY);
         let sandX = Math.floor(posX / tileSize) * tileSize;
         let sandY = Math.floor(posY / tileSize) * tileSize;
-        sand.push([sandX, sandY, tileSize, tileSize, 1, false])
+        sand.push([sandX, sandY, tileSize, tileSize, 1, 0])
     }
 }
 
@@ -52,7 +52,9 @@ function addSand(event){
 function drawSand(){
     for (let index = 0; index < sand.length; index++) {
         let data = sand[index];
-        let speed = sandSpeed(data)
+        let speed;
+        if (data[5] < 30){speed = sandSpeed(data)}
+        else {speed = 0}
         pen.fillRect(data[0], data[1] += speed, data[2], data[3])
         pen.stroke()
     }
@@ -60,13 +62,9 @@ function drawSand(){
 
 // Sets the sands movement speed________________________________________________________________________________________
 function sandSpeed(data){
-    // if the sand has reached it's final spot don't check if it can move
-    // if (data[5] === true){
-    //     return 0;
-    // }
+    data[5] += .1;
     let move = checkBelow(data);
     if (move ===  false) {
-        data[5] = true;
         return 0
     } else if (move === "down"){
         data[4] += 0
@@ -111,6 +109,14 @@ function checkSides(data){
         // Left side taken
         } else if ((data[1] + tileSize === tile[1] && data[0] - tileSize === tile[0])) {
             blockedSides[1] = true;
+
+        // Right wall
+        } else if (data[0] + tileSize >= width){
+            blockedSides[0] = true;
+
+        // Left wall
+        } else if (data[0] - tileSize < 0){
+            blockedSides[1] = true;
         }
     }
     if (blockedSides[0] === true && blockedSides[1] === true){
@@ -129,7 +135,7 @@ function checkSides(data){
     }
 }
 
-// Makes many sand pieces spawn around the players click point_________________________________________________________________
+// Makes many sand pieces spawn around the players click point__________________________________________________________
 function sandShower(mousePos){
     let randPos = Math.floor(Math.random() * 10) - 5
     if (randPos < 0) {
@@ -154,7 +160,6 @@ function running(){
     drawBoundary();// Draw a boundary around canvas
     //drawGrid(); // Draw the grid on the screen
 
-    // setTimeout(() => {requestAnimationFrame(running) }, 1000/60)
     requestAnimationFrame(running)
 }
 
