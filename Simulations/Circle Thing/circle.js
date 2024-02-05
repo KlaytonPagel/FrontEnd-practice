@@ -12,7 +12,7 @@ class circleThing {
     // Constructor to initialize all variables and values______________________________________________________________
     constructor(pen) {
         this.pen = pen;
-        this.colors = ["red", "blue", "green", "white", "orange", "yellow", "black"]
+        this.colors = ["red", "blue", "green", "white", "orange", "pink", "black", "yellow"]
 
         this.outerRadius = width / 5;
         this.outerX = width / 2;
@@ -35,15 +35,25 @@ class circleThing {
     // Draws the outer circle___________________________________________________________________________________________
     createOuterCircle() {
         this.pen.lineWidth = 5;
-        this.pen. beginPath();
-        this.pen.arc(this.outerX, this.outerY, this.outerRadius, 0, Math.PI * 2);
-        this.pen.stroke();
+        let section = Math.PI * 2 / 16;
+
+        let color = "black"
+
+        for (let index = 0; index < 16; index++) {
+            this.pen.beginPath();
+            if (color === "black"){color = "red"}
+            else {color = "black"}
+            this.pen.strokeStyle = color;
+            this.pen.arc(this.outerX, this.outerY, this.outerRadius, section * index, section * (index + 1) );
+            this.pen.stroke();
+        }
     }
 
     // Draws the inner circle___________________________________________________________________________________________
     createInnerCircle() {
         this.pen.lineWidth = 10;
         this.pen.beginPath();
+        this.pen.strokeStyle = "black"
         this.pen.fillStyle = this.innerColor
         this.pen.arc(this.innerX, this.innerY, this.innerRadius, 0, Math.PI * 2);
         this.pen.stroke();
