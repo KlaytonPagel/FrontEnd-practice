@@ -19,13 +19,14 @@ class circleThing {
         this.outerY = height / 2;
         this.outerTop = this.outerY - this.outerRadius;
         this.outerBottom = this.outerY + this.outerRadius;
+        this.outerPoints = [];
 
         this.innerRadius = this.outerRadius / 10;
         this.innerX = width / 2;
         this.innerY = height / 2
-        this.innerDirectionY = 1;
+        this.innerDirectionY = 5;
         this.innerDirectionX = 0;
-        this.innerSpeed = 5;
+        this.innerSpeed = 0;
         this.innerColor = "red";
         this.innerColorIndex = 0;
 
@@ -35,16 +36,23 @@ class circleThing {
     // Draws the outer circle___________________________________________________________________________________________
     createOuterCircle() {
         this.pen.lineWidth = 5;
-        let section = Math.PI * 2 / 16;
+        this.pen.beginPath()
+        this.pen.arc(this.outerX, this.outerY, this.outerRadius, 0 , Math.PI*2);
+        this.pen.stroke();
+    }
 
-        let color = "black"
-
-        for (let index = 0; index < 16; index++) {
+    // Finds all points for the outer circle____________________________________________________________________________
+    findOuterPoints() {
+        for (let x = this.outerX - this.outerRadius; x <= this.outerX + this.outerRadius; x += 4){
             this.pen.beginPath();
-            if (color === "black"){color = "red"}
-            else {color = "black"}
-            this.pen.strokeStyle = color;
-            this.pen.arc(this.outerX, this.outerY, this.outerRadius, section * index, section * (index + 1) );
+            let y = Math.sqrt((this.outerRadius + x - this.outerX)*(this.outerRadius - x + this.outerX)) + this.outerY
+            this.pen.arc(x, y, 1, 0, Math.PI * 2)
+            this.pen.stroke();
+        }
+        for (let x = this.outerX - this.outerRadius; x <= this.outerX + this.outerRadius; x += 4){
+            this.pen.beginPath();
+            let y = -Math.sqrt((this.outerRadius + x - this.outerX)*(this.outerRadius - x + this.outerX)) + this.outerY
+            this.pen.arc(x, y, 1, 0, Math.PI * 2)
             this.pen.stroke();
         }
     }
@@ -90,7 +98,9 @@ class circleThing {
         this.innerY += this.innerSpeed * this.innerDirectionY;
         this.innerX += 0.5 * this.innerDirectionX;
         this.createInnerCircle();
-        this.createOuterCircle();
+        //this.createOuterCircle();
+
+        this.findOuterPoints();
     }
 }
 
