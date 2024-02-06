@@ -24,13 +24,16 @@ class circleThing {
         this.innerRadius = this.outerRadius / 10;
         this.innerX = width / 2;
         this.innerY = height / 2
-        this.innerDirectionY = 5;
-        this.innerDirectionX = 0;
-        this.innerSpeed = 0;
+        this.innerDirectionY = 1;
+        this.innerDirectionX = 1;
+        this.innerSpeed = 10;
         this.innerColor = "red";
         this.innerColorIndex = 0;
+        this.innerPoints = []
 
         console.log("created circle thing")
+
+        this.first = true
     }
 
     // Draws the outer circle___________________________________________________________________________________________
@@ -46,15 +49,22 @@ class circleThing {
         for (let x = this.outerX - this.outerRadius; x <= this.outerX + this.outerRadius; x += 4){
             this.pen.beginPath();
             let y = Math.sqrt((this.outerRadius + x - this.outerX)*(this.outerRadius - x + this.outerX)) + this.outerY
+            if (this.first === true) {
+                this.outerPoints.push([x, y])
+            }
             this.pen.arc(x, y, 1, 0, Math.PI * 2)
             this.pen.stroke();
         }
         for (let x = this.outerX - this.outerRadius; x <= this.outerX + this.outerRadius; x += 4){
             this.pen.beginPath();
             let y = -Math.sqrt((this.outerRadius + x - this.outerX)*(this.outerRadius - x + this.outerX)) + this.outerY
+            if (this.first === true) {
+                this.outerPoints.push([x, y])
+            }
             this.pen.arc(x, y, 1, 0, Math.PI * 2)
             this.pen.stroke();
         }
+        this.first = false;
     }
 
     // Draws the inner circle___________________________________________________________________________________________
@@ -68,16 +78,65 @@ class circleThing {
         this.pen.fill();
     }
 
+    findInnerPoints() {
+        this.innerPoints = [];
+        for (let x = this.innerX - this.innerRadius; x <= this.innerX + this.innerRadius; x += 4){
+            this.pen.beginPath();
+            let y = Math.sqrt((this.innerRadius + x - this.innerX)*(this.innerRadius - x + this.innerX)) + this.innerY
+            this.innerPoints.push([x, y])
+            this.pen.arc(x, y, 1, 0, Math.PI * 2)
+            this.pen.stroke();
+        }
+        for (let x = this.innerX - this.innerRadius; x <= this.innerX + this.innerRadius; x += 4){
+            this.pen.beginPath();
+            let y = -Math.sqrt((this.innerRadius + x - this.innerX)*(this.innerRadius - x + this.innerX)) + this.innerY
+            this.innerPoints.push([x, y])
+            this.pen.arc(x, y, 1, 0, Math.PI * 2)
+            this.pen.stroke();
+        }
+    }
+
     // Checks for collision between the outer nd inner circles__________________________________________________________
     checkCollision() {
-        if (this.innerY + this.innerRadius > this.outerBottom) {
-            this.innerDirectionY = -1;
-            this.innerRadius+= 1
-            this.changeColor()
-        } else if (this.innerY - this.innerRadius < this.outerTop) {
-            this.innerDirectionY = 1;
-            this.innerRadius += 1
-            this.changeColor()
+        for (let outerIndex = 0; outerIndex < this.outerPoints.length; outerIndex ++) {
+            for (let innerIndex = 0; innerIndex < this.innerPoints.length; innerIndex++) {
+
+                // Bottom right segment
+                if (this.outerPoints[outerIndex][0] > this.outerX && this.outerPoints[outerIndex][1] > this.outerY) {
+                    if (this.innerPoints[innerIndex][0] > this.outerPoints[outerIndex][0]&&
+                        this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
+                        this.innerDirectionX *= -1;
+                        this.innerDirectionY *= -1;
+                    }
+                }
+
+                // Bottom left segment
+                if (this.outerPoints[outerIndex][0] < this.outerX && this.outerPoints[outerIndex][1] > this.outerY) {
+                    if (this.innerPoints[innerIndex][0] < this.outerPoints[outerIndex][0]&&
+                        this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
+                        this.innerDirectionX *= -1;
+                        this.innerDirectionY *= -1;
+                    }
+                }
+
+                // Top left segment
+                if (this.outerPoints[outerIndex][0] < this.outerX && this.outerPoints[outerIndex][1] < this.outerY) {
+                    if (this.innerPoints[innerIndex][0] < this.outerPoints[outerIndex][0]&&
+                        this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
+                        this.innerDirectionX *= -1;
+                        this.innerDirectionY *= -1;
+                    }
+                }
+
+                // Top right segment
+                if (this.outerPoints[outerIndex][0] > this.outerX && this.outerPoints[outerIndex][1] < this.outerY) {
+                    if (this.innerPoints[innerIndex][0] > this.outerPoints[outerIndex][0]&&
+                        this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
+                        this.innerDirectionX *= -1;
+                        this.innerDirectionY *= -1;
+                    }
+                }
+            }
         }
     }
 
@@ -97,9 +156,10 @@ class circleThing {
         this.pen.clearRect(0, 0, width, height);
         this.innerY += this.innerSpeed * this.innerDirectionY;
         this.innerX += 0.5 * this.innerDirectionX;
-        this.createInnerCircle();
+        //this.createInnerCircle();
         //this.createOuterCircle();
 
+        this.findInnerPoints();
         this.findOuterPoints();
     }
 }
