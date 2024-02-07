@@ -1,0 +1,10 @@
+#screen {
+    background: #561c8c;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}

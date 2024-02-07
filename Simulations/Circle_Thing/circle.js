@@ -14,19 +14,19 @@ class circleThing {
         this.pen = pen;
         this.hue = 0;
 
-        this.outerRadius = width / 5;
+        this.outerRadius = width / 2;
         this.outerX = width / 2;
         this.outerY = height / 2;
         this.outerPoints = [];
+        this.getOuterSize();
         this.findOuterPoints();
 
         this.innerRadius = this.outerRadius / 10;
-        this.innerX = width / 2 - 200;
+        this.innerX = width / 2 - this.outerRadius / 1.5;
         this.innerY = height / 2
         this.innerDirectionY = 1;
         this.innerDirectionX = 0;
         this.innerSpeed = 5;
-        this.innerColorIndex = 0;
         this.innerPoints = [];
         this.previousPoints = [];
 
@@ -35,6 +35,15 @@ class circleThing {
         console.log("created circle thing")
 
         this.collisions = 0;
+    }
+
+    // Sets the size of the outer circle based on the smallest axis_____________________________________________________
+    getOuterSize() {
+        if (width < height){
+            this.outerRadius =  width / 2;
+        } else {
+            this.outerRadius = height / 2;
+        }
     }
 
     // Draws the outer circle___________________________________________________________________________________________
@@ -206,7 +215,7 @@ class circleThing {
 
         this.findInnerPoints();
 
-        if (this.previousPoints.length > 1){
+        if (this.previousPoints.length > 20){
             this.previousPoints.shift();
         }
 
