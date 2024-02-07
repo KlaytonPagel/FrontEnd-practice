@@ -24,3 +24,17 @@ I decided to try making my own version of this using Java script, and HTML canva
 So far I have methods to generate the large circle container and the smaller ball inside.
 I added basic collision and the ability to change the size, speed, ore both.
 I started the preperations to implement more complicated collisions.
+
+2/5/2024
+- Worked on Circle Thing
+
+I continued to work on the Circle thing simulation. 
+I created a method to find several points on both the oute and inner circle to use for collision checking.
+
+2/6/2024
+- More circle thing work
+
+I as able to correct and use the several points from the circles for collision.
+I use the collision to change the direction of the inner circle and physical aspects of it such as speed and size.
+I added some nice looking polish by drawing the past few points of the circle for a shadowing effect and slowing changing the color of the circle.
+I would like to work more on the physics and fine tuning the directional change more, but for the most part it looks close to complete.
