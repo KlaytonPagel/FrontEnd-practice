@@ -1,6 +1,6 @@
 // Set up canvas________________________________________________________________________________________________________
-screen = document.getElementById("screen");
-pen = screen.getContext("2d");
+let screen = document.getElementById("screen");
+let pen = screen.getContext("2d");
 let width  = window.innerWidth - 15;
 let height  = window.innerHeight - 20;
 screen.width = width;
@@ -11,6 +11,10 @@ const rowCount = Math.floor(height / tileSize);
 const colCount = Math.floor(width / tileSize);
 
 let sand = []; // Empty array to hold sand
+
+let mouseHeld = false;
+let mouseX = 0;
+let mouseY = 0;
 
 // Draw a gird on the screen____________________________________________________________________________________________
 function drawGrid(){
@@ -36,9 +40,7 @@ function drawBoundary(){
 }
 
 // Add a sand tile to an array__________________________________________________________________________________________
-function addSand(event){
-    mouseX = event.offsetX;
-    mouseY = event.offsetY;
+function addSand(){
     for (let num = 0; num < 4; num++) {
         let posX = sandShower(mouseX);
         let posY = sandShower(mouseY);
@@ -148,7 +150,20 @@ function sandShower(mousePos){
 
 // Checks for users input_______________________________________________________________________________________________
 function userInput(){
-    screen.onmousedown = addSand
+    screen.onmousedown = function(event) {
+        mouseHeld = true
+        mouseX = event.offsetX;
+        mouseY = event.offsetY;
+        screen.onmousemove = function (event) {
+            mouseX = event.offsetX;
+            mouseY = event.offsetY;
+        }
+    }
+    screen.onmouseup = function() {mouseHeld = false}
+
+    if (mouseHeld === true){
+        addSand();
+    }
 }
 
 // The main program loop________________________________________________________________________________________________
