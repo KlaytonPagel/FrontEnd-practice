@@ -16,6 +16,10 @@ let mouseHeld = false;
 let mouseX = 0;
 let mouseY = 0;
 
+let sandCoolDown = new Date().getTime();
+let sandCoolDownMilliseconds = 50;
+let sandCanDrop = true;
+
 // Draw a gird on the screen____________________________________________________________________________________________
 function drawGrid(){
     for (let row = 0; row < rowCount; row++){
@@ -148,6 +152,14 @@ function sandShower(mousePos){
     return (randPos * tileSize) + mousePos
 }
 
+// Cool down for dropping sand__________________________________________________________________________________________
+function dropCoolDown() {
+    if (new Date().getTime() - sandCoolDown > sandCoolDownMilliseconds) {
+        sandCoolDown = new Date().getTime();
+        sandCanDrop = true;
+    }
+}
+
 // Checks for users input_______________________________________________________________________________________________
 function userInput(){
     screen.onmousedown = function(event) {
@@ -161,7 +173,8 @@ function userInput(){
     }
     screen.onmouseup = function() {mouseHeld = false}
 
-    if (mouseHeld === true){
+    if (mouseHeld === true && sandCanDrop === true){
+        sandCanDrop = false;
         addSand();
     }
 }
@@ -174,6 +187,8 @@ function running(){
     drawSand(); // Draws the sand the player places
     drawBoundary();// Draw a boundary around canvas
     //drawGrid(); // Draw the grid on the screen
+
+    dropCoolDown();
 
     requestAnimationFrame(running)
 }
