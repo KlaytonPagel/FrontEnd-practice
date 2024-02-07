@@ -1,12 +1,18 @@
 // Set up canvas________________________________________________________________________________________________________
 let screen = document.getElementById("screen");
+let sizeSlider = document.getElementById("size")
+let sizeText = document.getElementById("slider_text")
 let pen = screen.getContext("2d");
 let width  = window.innerWidth - 15;
 let height  = window.innerHeight - 20;
 screen.width = width;
 screen.height = height;
 
-const tileSize = 8; // The size of each piece of sand
+getSandSize();
+setSandSize();
+sizeSlider.oninput = setSandSize
+
+const tileSize = parseInt(sizeSlider.value); // The size of each piece of sand
 const rowCount = Math.floor(height / tileSize);
 const colCount = Math.floor(width / tileSize);
 
@@ -20,6 +26,18 @@ let sandCoolDown = new Date().getTime();
 let sandCoolDownMilliseconds = 50;
 let sandCanDrop = true;
 
+function getSandSize() {
+    if (localStorage.getItem("sandSize") === null){
+        localStorage.setItem("sandSize", "8");
+    }
+    sizeSlider.value = localStorage.getItem("sandSize");
+}
+
+function setSandSize() {
+    sizeText.innerHTML = "Sand Pixel Size: " + sizeSlider.value;
+    localStorage.setItem("sandSize", sizeSlider.value);
+}
+
 // Draw a gird on the screen____________________________________________________________________________________________
 function drawGrid(){
     for (let row = 0; row < rowCount; row++){
@@ -29,18 +47,6 @@ function drawGrid(){
             pen.stroke();
         }
     }
-}
-
-// Draw screen boundary_________________________________________________________________________________________________
-function drawBoundary(){
-    // Draw lines around the boundary of the canvas
-    pen.moveTo(0,0);
-    pen.lineTo(width, 0);
-    pen.lineTo(width, height);
-    pen.lineTo(0, height);
-    pen.lineTo(0, 0);
-    pen.stroke();
-
 }
 
 // Add a sand tile to an array__________________________________________________________________________________________
@@ -59,7 +65,7 @@ function drawSand(){
     for (let index = 0; index < sand.length; index++) {
         let data = sand[index];
         let speed;
-        if (data[5] < 30){speed = sandSpeed(data)}
+        if (data[5] < 100){speed = sandSpeed(data)}
         else {speed = 0}
         pen.fillRect(data[0], data[1] += speed, data[2], data[3])
         pen.stroke()
@@ -185,7 +191,6 @@ function running(){
     pen.clearRect(0, 0, width, height); // Clear the screen
     userInput()
     drawSand(); // Draws the sand the player places
-    drawBoundary();// Draw a boundary around canvas
     //drawGrid(); // Draw the grid on the screen
 
     dropCoolDown();
