@@ -12,36 +12,33 @@ class circleThing {
     // Constructor to initialize all variables and values______________________________________________________________
     constructor(pen) {
         this.pen = pen;
-        this.colors = ["red", "blue", "green", "white", "orange", "pink", "black", "yellow"]
+        this.hue = 0;
 
         this.outerRadius = width / 5;
         this.outerX = width / 2;
         this.outerY = height / 2;
         this.outerPoints = [];
+        this.findOuterPoints();
 
         this.innerRadius = this.outerRadius / 10;
-        this.innerX = width / 2;
+        this.innerX = width / 2 - 200;
         this.innerY = height / 2
         this.innerDirectionY = 1;
         this.innerDirectionX = 0;
         this.innerSpeed = 5;
-        this.innerColor = "red";
         this.innerColorIndex = 0;
         this.innerPoints = [];
-        this.previousX = this.innerX;
-        this.previousY = this.innerY;
         this.previousPoints = [];
 
         this.currentVelocity = 0;
 
         console.log("created circle thing")
 
-        this.first = true
         this.collisions = 0;
     }
 
     // Draws the outer circle___________________________________________________________________________________________
-    createOuterCircle() {
+    drawOuterCircle() {
         this.pen.lineWidth = 5;
         this.pen.beginPath()
         this.pen.arc(this.outerX, this.outerY, this.outerRadius, 0 , Math.PI*2);
@@ -54,93 +51,70 @@ class circleThing {
 
         // Bottom half
         for (let x = this.outerX - this.outerRadius; x <= this.outerX + this.outerRadius; x += 10){
-            this.pen.beginPath();
             let y = Math.sqrt((this.outerRadius + x - this.outerX)*(this.outerRadius - x + this.outerX)) + this.outerY
-            if (this.first === true) {
-                this.outerPoints.push([x, y])
-            }
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
+            this.outerPoints.push([x, y])
         }
         // Top half
         for (let x = this.outerX - this.outerRadius; x <= this.outerX + this.outerRadius; x += 10){
-            this.pen.beginPath();
             let y = -Math.sqrt((this.outerRadius + x - this.outerX)*(this.outerRadius - x + this.outerX)) + this.outerY
-            if (this.first === true) {
-                this.outerPoints.push([x, y])
-            }
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
+            this.outerPoints.push([x, y])
         }
         // Right half
         for (let y = this.outerY - this.outerRadius; y <= this.outerY + this.outerRadius; y += 10){
-            this.pen.beginPath();
             let x = Math.sqrt((this.outerRadius + y - this.outerY)*(this.outerRadius - y + this.outerY)) + this.outerX
-            if (this.first === true) {
-                this.outerPoints.push([x, y])
-            }
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
+            this.outerPoints.push([x, y])
         }
         // Left half
         for (let y = this.outerY - this.outerRadius; y <= this.outerY + this.outerRadius; y += 10){
-            this.pen.beginPath();
             let x = -Math.sqrt((this.outerRadius + y - this.outerY)*(this.outerRadius - y + this.outerY)) + this.outerX
-            if (this.first === true) {
-                this.outerPoints.push([x, y])
-            }
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
+            this.outerPoints.push([x, y])
         }
-        this.first = false;
     }
 
     // Draws the inner circle___________________________________________________________________________________________
-    createInnerCircle() {
+    drawInnerCircle() {
         this.pen.lineWidth = 10;
         this.pen.beginPath();
         this.pen.strokeStyle = "black"
-        this.pen.fillStyle = this.innerColor
+        this.pen.fillStyle = "hsl(" + this.hue + ", 100%, 50%)";
+
+        // Draw past circle positions
+        for (let index = 0; index < this.previousPoints.length; index++) {
+            this.pen.beginPath();
+            this.pen.arc(this.previousPoints[index][0], this.previousPoints[index][1], this.innerRadius, 0, Math.PI * 2)
+            this.pen.fill();
+            this.pen.stroke();
+        }
+
+        // Draw current circle position
         this.pen.arc(this.innerX, this.innerY, this.innerRadius, 0, Math.PI * 2);
         this.pen.stroke();
         this.pen.fill();
     }
 
+    // Find points on the inner circle__________________________________________________________________________________
     findInnerPoints() {
         this.innerPoints = [];
 
         // Bottom half
         for (let x = this.innerX - this.innerRadius; x <= this.innerX + this.innerRadius; x += 5){
-            this.pen.beginPath();
             let y = Math.sqrt((this.innerRadius + x - this.innerX)*(this.innerRadius - x + this.innerX)) + this.innerY
             this.innerPoints.push([x, y])
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
         }
-
         // Top half
         for (let x = this.innerX - this.innerRadius; x <= this.innerX + this.innerRadius; x += 5){
-            this.pen.beginPath();
             let y = -Math.sqrt((this.innerRadius + x - this.innerX)*(this.innerRadius - x + this.innerX)) + this.innerY
             this.innerPoints.push([x, y])
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
         }
         // Right half
         for (let y = this.innerY - this.innerRadius; y <= this.innerY + this.innerRadius; y += 5){
-            this.pen.beginPath();
             let x = Math.sqrt((this.innerRadius + y - this.innerY)*(this.innerRadius - y + this.innerY)) + this.innerX
             this.innerPoints.push([x, y])
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
         }
         // Left half
         for (let y = this.innerY - this.innerRadius; y <= this.innerY + this.innerRadius; y += 5){
-            this.pen.beginPath();
             let x = -Math.sqrt((this.innerRadius + y - this.innerY)*(this.innerRadius - y + this.innerY)) + this.innerX
             this.innerPoints.push([x, y])
-            this.pen.arc(x, y, 1, 0, Math.PI * 2)
-            this.pen.stroke();
         }
     }
 
@@ -155,6 +129,7 @@ class circleThing {
                         this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
                         this.collide();
                         this.innerDirectionY = -1;
+                        this.innerDirectionX = -.5;
                         return;
                     }
                 }
@@ -165,6 +140,7 @@ class circleThing {
                         this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
                         this.collide();
                         this.innerDirectionY = -1;
+                        this.innerDirectionX = .5;
                         return;
                     }
                 }
@@ -175,6 +151,7 @@ class circleThing {
                         this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
                         this.collide();
                         this.innerDirectionY = 1;
+                        this.innerDirectionX = .5;
                         return;
                     }
                 }
@@ -185,6 +162,7 @@ class circleThing {
                         this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
                         this.collide();
                         this.innerDirectionY = 1;
+                        this.innerDirectionX = -.5;
                         return;
                     }
                 }
@@ -192,38 +170,29 @@ class circleThing {
         }
     }
 
+    // Changes made when the ball collides______________________________________________________________________________
     collide() {
-        this.changeColor();
-        this.innerDirectionX *= -1;
-        this.currentVelocity = 0;
-        this.innerDirectionX += 0;
+        this.hue += 1 // Change the color of the circle
+        this.innerDirectionX *= -1; // change the balls direction
+        this.currentVelocity = 0; // reset gravity
+
+        this.innerSpeed += .5;
+        this.innerRadius += .5;
+
+        // set the position to the circles last position
         this.innerX = this.previousPoints[this.previousPoints.length - 1][0]
         this.innerY = this.previousPoints[this.previousPoints.length - 1][1]
+
         this.collisions ++
-        console.log(this.innerDirectionX)
-
-    }
-
-
-    // Loops through an array of colors_________________________________________________________________________________
-    changeColor() {
-        if (this.innerColor === this.colors[this.colors.length - 1]) {
-            this.innerColor = this.colors[0]
-            this.innerColorIndex = 0;
-        } else {
-            this.innerColor = this.colors[this.innerColorIndex += 1]
-        }
     }
 
     move() {
         this.checkCollision();
         this.previousPoints.push([this.innerX, this.innerY])
-        this.previousX = this.innerX;
-        this.previousY = this.innerY;
         this.innerY += (this.innerSpeed * this.innerDirectionY) + this.currentVelocity;
         this.innerX += this.innerSpeed * this.innerDirectionX;
 
-        this.currentVelocity += .1;
+        this.currentVelocity += .17; // Increase the effect of gravity
     }
 
     // The main loop that makes changes and updates everything or every frame___________________________________________
@@ -232,17 +201,11 @@ class circleThing {
 
         this.move();
 
-        //this.createInnerCircle();
-        //this.createOuterCircle();
+        this.drawInnerCircle();
+        this.drawOuterCircle();
 
         this.findInnerPoints();
-        this.findOuterPoints();
 
-        for (let index = 0; index < this.previousPoints.length; index++) {
-            this.pen.beginPath();
-            this.pen.arc(this.previousPoints[index][0], this.previousPoints[index][1], this.innerRadius, 0, Math.PI * 2)
-            //this.pen.stroke();
-        }
         if (this.previousPoints.length > 1){
             this.previousPoints.shift();
         }
@@ -250,6 +213,7 @@ class circleThing {
         this.debug(this.collisions)
     }
 
+    // Display the provided information as text on screen_______________________________________________________________
     debug(text) {
         this.pen.beginPath()
         this.pen.font = "50px Arial"
@@ -264,8 +228,8 @@ let circ = new circleThing(pen);
 // Animation loop to run the simulation
 function running() {
     circ.update();
-    //setTimeout(() => requestAnimationFrame(running), 1000/60)
-    requestAnimationFrame(running);
+    setTimeout(() => requestAnimationFrame(running), 1000/60)
+    //requestAnimationFrame(running);
 }
 
 running();
