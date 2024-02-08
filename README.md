@@ -47,3 +47,4 @@ I added sound to the circle thing. Now every collision will play a sound then se
 I still need to clean up the physics.
 
 I added a slider for the sand simulator, so you can now change the size of the sand. I made it so the sand is now cycling through the colors.
+I added the ability to click and hold to drop the sand. I made a cooldown to dropping sand so it doesn't drop every frame.
