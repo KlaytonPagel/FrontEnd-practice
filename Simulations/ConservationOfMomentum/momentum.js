@@ -72,7 +72,6 @@ class Circle {
         object.velocityY = speed * normalVector.y;
         this.velocityX = speed * -normalVector.x;
         this.velocityY = speed * -normalVector.y;
-        console.log(speed)
     }
 
     move() {

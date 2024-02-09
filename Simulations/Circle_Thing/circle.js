@@ -24,9 +24,9 @@ class circleThing {
         this.innerRadius = this.outerRadius / 10;
         this.innerX = width / 2 - this.outerRadius / 1.5;
         this.innerY = height / 2
-        this.innerDirectionY = 1;
-        this.innerDirectionX = 0;
-        this.innerSpeed = 10;
+        this.velocityX = 0;
+        this.velocityY = 1;
+        this.speed = 5
         this.innerPoints = [];
         this.previousPoints = [];
 
@@ -149,66 +149,26 @@ class circleThing {
     // Checks for collision between the outer and inner circles_________________________________________________________
     checkCollision() {
         for (let outerIndex = 0; outerIndex < this.outerPoints.length; outerIndex ++) {
-            for (let innerIndex = 0; innerIndex < this.innerPoints.length; innerIndex++) {
-
-                // Bottom right segment
-                if (this.outerPoints[outerIndex][0] > this.outerX && this.outerPoints[outerIndex][1] > this.outerY) {
-                    if (this.innerPoints[innerIndex][0] > this.outerPoints[outerIndex][0]&&
-                        this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
-                        this.getSlope(outerIndex);
-                        this.innerDirectionX = this.vect.y
-                        this.innerDirectionY = -this.vect.x
-                        this.collide();
-                        return;
-                    }
-                }
-
-                // Bottom left segment
-                else if (this.outerPoints[outerIndex][0] < this.outerX && this.outerPoints[outerIndex][1] > this.outerY) {
-                    if (this.innerPoints[innerIndex][0] < this.outerPoints[outerIndex][0]&&
-                        this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
-                        this.getSlope(outerIndex);
-                        this.innerDirectionX = this.vect.y
-                        this.innerDirectionY = -this.vect.x
-                        this.collide();
-                        return;
-                    }
-                }
-
-                // Top left segment
-                else if (this.outerPoints[outerIndex][0] < this.outerX && this.outerPoints[outerIndex][1] < this.outerY) {
-                    if (this.innerPoints[innerIndex][0] < this.outerPoints[outerIndex][0]&&
-                        this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
-                        this.getSlope(outerIndex);
-                        this.innerDirectionX = -this.vect.y
-                        this.innerDirectionY = this.vect.x
-                        this.collide();
-                        return;
-                    }
-                }
-
-                // Top right segment
-                else if (this.outerPoints[outerIndex][0] > this.outerX && this.outerPoints[outerIndex][1] < this.outerY) {
-                    if (this.innerPoints[innerIndex][0] > this.outerPoints[outerIndex][0]&&
-                        this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
-                        this.getSlope(outerIndex);
-                        this.innerDirectionX = -this.vect.y
-                        this.innerDirectionY = this.vect.x
-                        this.collide();
-                        return;
-                    }
-                }
+            let point = this.outerPoints[outerIndex];
+            let distance = Math.sqrt((point[0]-this.innerX)*(point[0]-this.innerX) + (point[1]-this.innerY)*(point[1]-this.innerY))
+            if (distance <= this.innerRadius){
+                this.collide(point);
             }
         }
     }
 
     // Changes made when the ball collides______________________________________________________________________________
-    collide() {
+    collide(point) {
+        let collisionVector = {x: point[0] - this.innerX, y: point[1] - this.innerY};
+        let distance = Math.sqrt((point[0]-this.innerX)*(point[0]-this.innerX)+(point[1]-this.innerY)*(point[1]-this.innerY));
+        let normalVector = {x: collisionVector.x / distance, y: collisionVector.y / distance};
+        this.velocityX = this.speed * -normalVector.x;
+        this.velocityY = this.speed * -normalVector.y;
+
         this.hue += 1 // Change the color of the circle
         this.currentVelocity = 0; // reset gravity
-
-        this.innerSpeed += .5;
         this.innerRadius += .5;
+        this.speed += .5;
 
         // set the position to the circles last position
         this.innerX = this.previousPoints[this.previousPoints.length - 1][0]
@@ -216,20 +176,8 @@ class circleThing {
 
         this.collisions ++
 
-        //new Audio(this.audioFiles[this.currentAudio]).play();
+        new Audio(this.audioFiles[this.currentAudio]).play();
         this.updateAudio();
-    }
-
-    getSlope(outerIndex) {
-
-        // Gets the slope of the spot the ball collided with
-        let outerRise = this.outerPoints[outerIndex][1] - this.outerPoints[outerIndex-1][1];
-        let outerRun = this.outerPoints[outerIndex][0] - this.outerPoints[outerIndex-1][0];
-
-        this.vect = {
-            x: outerRun / Math.sqrt((outerRun * outerRun) + (outerRise*outerRise)),
-            y: outerRise / Math.sqrt((outerRun * outerRun) + (outerRise*outerRise))
-        }
     }
 
     updateAudio() {
@@ -241,11 +189,11 @@ class circleThing {
 
     move() {
         this.checkCollision();
-        this.previousPoints.push([this.innerX, this.innerY])
-        this.innerY += (this.innerSpeed * this.innerDirectionY) + this.currentVelocity;
-        this.innerX += this.innerSpeed * this.innerDirectionX;
+        this.previousPoints.push([this.innerX, this.innerY]);
+        this.innerY += this.velocityY + this.currentVelocity;
+        this.innerX += this.velocityX;
 
-        this.currentVelocity += .05; // Increase the effect of gravity
+        this.currentVelocity += .2; // Increase the effect of gravity
     }
 
     // The main loop that makes changes and updates everything or every frame___________________________________________

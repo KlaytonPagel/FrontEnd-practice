@@ -10,8 +10,8 @@ screen.width = width;
 class Circle {
     constructor(context, width, height, x, y, xdir) {
         this.pen = context
-        this.directionX = xdir;
-        this.directionY = 0;
+        this.velocityX = xdir;
+        this.velocityY = 0;
         this.speed = 5;
 
         this.height = height;
@@ -19,18 +19,20 @@ class Circle {
 
         this.x = x
         this.y = y
+
+        this.radius = 40
     }
 
     draw () {
         this.pen.lineWidth = 10;
         this.pen.beginPath();
-        this.pen.arc(this.x, this.y, 40, 0, Math.PI*2)
+        this.pen.arc(this.x, this.y, this.radius, 0, Math.PI*2)
         this.pen.stroke();
     }
 
     move () {
-        this.x += this.directionX * this.speed;
-        this.y += this.directionY * this.speed;
+        this.x += this.velocityX;
+        this.y += this.velocityY;
     }
 
     remove() {
@@ -41,36 +43,32 @@ class Circle {
         }
     }
 
-    collision () {
-        let tolerance = 5
-
-        let xmod = line.run / Math.sqrt(line.run * line.run + line.rise * line.rise)
-        let ymod = line.rise / Math.sqrt(line.run * line.run + line.rise * line.rise)
-        //console.log(xmod, ymod)
-
-        for (let point = 0; point < line.points.length - 1; point++){
-            if ((this.x + 40 > line.points[point][0]-tolerance && this.x + 40 < line.points[point][0]+tolerance) &&
-                 this.y > line.points[point][1]-tolerance && this.y < line.points[point][1]+tolerance) {
-                this.x -= 1;
-
-                this.directionX = ymod;
-                this.directionY = -xmod;
-            }
-
-            if ((this.x - 40 < line.points[point][0]-tolerance && this.x + 40 > line.points[point][0]+tolerance) &&
-                this.y > line.points[point][1]-tolerance && this.y < line.points[point][1]+tolerance) {
-                this.x += 1;
-
-                this.directionX = -ymod;
-                this.directionY = xmod;
+    checkCollision () {
+        for (let index = 0; index < line.points.length-1; index++) {
+            let point = line.points[index]
+            let distance = Math.sqrt((point[0] - this.x)*(point[0] - this.x)+(point[1] - this.y)*(point[1] - this.y))
+            if (distance <= this.radius-5) {
+                this.collide(point);
             }
         }
+    }
+
+    collide(point) {
+        let collisionVector = {x: point[0] - this.x, y: point[1] - this.y};
+        let distance = Math.sqrt((point[0]-this.x)*(point[0]-this.x) + (point[1]-this.y)*(point[1]-this.y));
+        let normalVector = {x: collisionVector.x / distance, y: collisionVector.y / distance};
+        let relativeVelocity = {x: this.velocityX, y: this.velocityY};
+        let speed = relativeVelocity.x * normalVector.x + relativeVelocity.y * normalVector.y;
+        speed = 3
+
+        this.velocityX = speed * -normalVector.x;
+        this.velocityY = speed * -normalVector.y;
     }
 
     update() {
         this.draw();
         this.move();
-        this.collision();
+        this.checkCollision();
         //this.remove();
     }
 }
@@ -126,17 +124,17 @@ class Line {
 }
 
 let circList = [];
-circList.push(new Circle(pen, width, height))
+//circList.push(new Circle(pen, width, height))
 let line = new Line(pen, width, height, 50, height/2, 1);
 
-// screen.onmousemove = function (event) {
-//     line.startPoint[0] = event.offsetX;
-//     line.startPoint[1] = event.offsetY;
-// }
+screen.onmousemove = function (event) {
+    line.startPoint[0] = event.offsetX;
+    line.startPoint[1] = event.offsetY;
+}
 screen.onmousedown = function () {
-    circList.push(new Circle(pen, width, height, 0, height/2, 1))
-    circList.push(new Circle(pen, width, height, width, height/2, -1))
-    console.log(circList.length)
+    circList.push(new Circle(pen, width, height, 0, height/2, 2))
+    circList.push(new Circle(pen, width, height, width, height/2, -2))
+    //console.log(circList.length)
 }
 
 function running () {
@@ -145,10 +143,11 @@ function running () {
 
     line.update();
 
-    for (let index = 0; index < circList.length; index++) {
-        circList[index].update()
+    if (circList.length > 0) {
+        for (let index = 0; index < circList.length; index++) {
+            circList[index].update()
+        }
     }
-
     requestAnimationFrame(running);
 }
 
