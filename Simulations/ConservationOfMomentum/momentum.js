@@ -39,9 +39,17 @@ class Circle {
     }
 
     wallCollision() {
-        if (this.x + this.radius > width || this.x - this.radius < 0) {
+        if (this.x + this.radius > width) {
+            this.x = width - this.radius;
             this.velocityX *= -1;
-        } else if (this.y + this.radius > height || this.y - this.radius < 0) {
+        } else if (this.x - this.radius < 0) {
+            this.x = this.radius;
+            this.velocityX *= -1;
+        } else if (this.y + this.radius > height) {
+            this.y = height - this.radius;
+            this.velocityY *= -1
+        } else if (this.y - this.radius < 0) {
+            this.y = this.radius;
             this.velocityY *= -1;
         }
     }
@@ -87,8 +95,17 @@ class Circle {
         this.draw();
     }
 }
-for (let num = 0; num < 100; num++) {
-    objects.push(new Circle(pen, Math.random()*200 + halfWidth, Math.random()*200 + halfHeight, 1, 50, "yellow"));
+
+let size = 50
+let xSpots = Math.floor(width / size);
+let ySpots = Math.floor(height / size);
+for (let x = 1; x <= xSpots; x++) {
+    for (let y = 1; y <= ySpots; y++) {
+        let chance = Math.random()
+        if (chance > .5) {
+            objects.push(new Circle(pen, x * size, y * size, 1, size / 2, "yellow"));
+        }
+    }
 }
 
 function running() {
