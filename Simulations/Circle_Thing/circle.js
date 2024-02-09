@@ -26,7 +26,7 @@ class circleThing {
         this.innerY = height / 2
         this.innerDirectionY = 1;
         this.innerDirectionX = 0;
-        this.innerSpeed = 5;
+        this.innerSpeed = 10;
         this.innerPoints = [];
         this.previousPoints = [];
 
@@ -155,9 +155,10 @@ class circleThing {
                 if (this.outerPoints[outerIndex][0] > this.outerX && this.outerPoints[outerIndex][1] > this.outerY) {
                     if (this.innerPoints[innerIndex][0] > this.outerPoints[outerIndex][0]&&
                         this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
+                        this.getSlope(outerIndex);
+                        this.innerDirectionX = this.vect.y
+                        this.innerDirectionY = -this.vect.x
                         this.collide();
-                        this.innerDirectionY = -1;
-                        this.innerDirectionX = -.5;
                         return;
                     }
                 }
@@ -166,9 +167,10 @@ class circleThing {
                 else if (this.outerPoints[outerIndex][0] < this.outerX && this.outerPoints[outerIndex][1] > this.outerY) {
                     if (this.innerPoints[innerIndex][0] < this.outerPoints[outerIndex][0]&&
                         this.innerPoints[innerIndex][1] > this.outerPoints[outerIndex][1]) {
+                        this.getSlope(outerIndex);
+                        this.innerDirectionX = this.vect.y
+                        this.innerDirectionY = -this.vect.x
                         this.collide();
-                        this.innerDirectionY = -1;
-                        this.innerDirectionX = .5;
                         return;
                     }
                 }
@@ -177,9 +179,10 @@ class circleThing {
                 else if (this.outerPoints[outerIndex][0] < this.outerX && this.outerPoints[outerIndex][1] < this.outerY) {
                     if (this.innerPoints[innerIndex][0] < this.outerPoints[outerIndex][0]&&
                         this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
+                        this.getSlope(outerIndex);
+                        this.innerDirectionX = -this.vect.y
+                        this.innerDirectionY = this.vect.x
                         this.collide();
-                        this.innerDirectionY = 1;
-                        this.innerDirectionX = .5;
                         return;
                     }
                 }
@@ -188,9 +191,10 @@ class circleThing {
                 else if (this.outerPoints[outerIndex][0] > this.outerX && this.outerPoints[outerIndex][1] < this.outerY) {
                     if (this.innerPoints[innerIndex][0] > this.outerPoints[outerIndex][0]&&
                         this.innerPoints[innerIndex][1] < this.outerPoints[outerIndex][1]) {
+                        this.getSlope(outerIndex);
+                        this.innerDirectionX = -this.vect.y
+                        this.innerDirectionY = this.vect.x
                         this.collide();
-                        this.innerDirectionY = 1;
-                        this.innerDirectionX = -.5;
                         return;
                     }
                 }
@@ -201,7 +205,6 @@ class circleThing {
     // Changes made when the ball collides______________________________________________________________________________
     collide() {
         this.hue += 1 // Change the color of the circle
-        this.innerDirectionX *= -1; // change the balls direction
         this.currentVelocity = 0; // reset gravity
 
         this.innerSpeed += .5;
@@ -213,8 +216,20 @@ class circleThing {
 
         this.collisions ++
 
-        new Audio(this.audioFiles[this.currentAudio]).play();
+        //new Audio(this.audioFiles[this.currentAudio]).play();
         this.updateAudio();
+    }
+
+    getSlope(outerIndex) {
+
+        // Gets the slope of the spot the ball collided with
+        let outerRise = this.outerPoints[outerIndex][1] - this.outerPoints[outerIndex-1][1];
+        let outerRun = this.outerPoints[outerIndex][0] - this.outerPoints[outerIndex-1][0];
+
+        this.vect = {
+            x: outerRun / Math.sqrt((outerRun * outerRun) + (outerRise*outerRise)),
+            y: outerRise / Math.sqrt((outerRun * outerRun) + (outerRise*outerRise))
+        }
     }
 
     updateAudio() {
@@ -230,7 +245,7 @@ class circleThing {
         this.innerY += (this.innerSpeed * this.innerDirectionY) + this.currentVelocity;
         this.innerX += this.innerSpeed * this.innerDirectionX;
 
-        this.currentVelocity += .17; // Increase the effect of gravity
+        this.currentVelocity += .05; // Increase the effect of gravity
     }
 
     // The main loop that makes changes and updates everything or every frame___________________________________________
