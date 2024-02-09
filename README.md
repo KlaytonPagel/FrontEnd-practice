@@ -48,3 +48,17 @@ I still need to clean up the physics.
 
 I added a slider for the sand simulator, so you can now change the size of the sand. I made it so the sand is now cycling through the colors.
 I added the ability to click and hold to drop the sand. I made a cooldown to dropping sand so it doesn't drop every frame.
+
+2/8/2024
+- Circle Thing Work
+- Working On Physics
+
+I did more work trying to implement better physics into the circle thing.
+I created two other projects used to expirement and play with physics.
+I used conservasion of moment in one of my other project and it seems to work way better.
+
+2/9/2024
+- Circle thing physics
+
+Implemented the conservaion of momentum into the circle thing project.
+It is way better than previouse physics mechanics. it still feels unnatural and needs more work.
