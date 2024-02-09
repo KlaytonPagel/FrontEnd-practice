@@ -38,3 +38,13 @@ I as able to correct and use the several points from the circles for collision.
 I use the collision to change the direction of the inner circle and physical aspects of it such as speed and size.
 I added some nice looking polish by drawing the past few points of the circle for a shadowing effect and slowing changing the color of the circle.
 I would like to work more on the physics and fine tuning the directional change more, but for the most part it looks close to complete.
+
+2/7/2024
+- Slight Circle Thing Tweaks
+- Sand Simulator Work
+
+I added sound to the circle thing. Now every collision will play a sound then select the next sound from the array looping back when at the end.
+I still need to clean up the physics.
+
+I added a slider for the sand simulator, so you can now change the size of the sand. I made it so the sand is now cycling through the colors.
+I added the ability to click and hold to drop the sand. I made a cooldown to dropping sand so it doesn't drop every frame.
