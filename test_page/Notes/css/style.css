@@ -1,0 +1,62 @@
+
+/*Comments*/
+
+
+/*Selectors-----------------------------------------------------------------------------------------------------------*/
+
+/*selector is used to select the element you are styling*/
+body {
+    /*inside the curly brace you have the property you set: the value you set it to*/
+    background: #9d8a2c;
+
+}
+
+/*element selectors use just the element type and is applied to all instances of that element*/
+h1 {
+
+}
+
+/*class selectors use a .class-name to reference, this effects all elements with that class name*/
+.header {
+
+}
+
+/*ID selectors use #element-id to reference, id is used to reference a single element*/
+#NotesHeader {
+
+}
+
+/*the star is a selector that applies to everything on the page*/
+* {
+
+}
+
+/*selectors can be combined to reference only elements that contain all referenced selectors*/
+.header#NotesHeader {
+    color: aqua;
+}
+
+/*Colors--------------------------------------------------------------------------------------------------------------*/
+
+/*rgb defines a color using (red,green,blue) color values*/
+.rgb {
+    color: rgb(255,255,255);
+}
+
+/*#ffffff is a hexadecimal representation of a color*/
+.hex {
+    color: #2c549d;
+}
+
+/*hsl set uses (hue, saturation, light) values*/
+.hsl {
+    color: hsl(240, 100%, 50%);
+}
+
+/*hsla uses (hue, saturation, light, alpha) values*/
+.hsla {
+    color: hsla(120, 100%, 50%, 20%);
+}
+
+
+
