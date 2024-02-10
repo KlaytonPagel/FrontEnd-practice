@@ -59,6 +59,10 @@ I used conservasion of moment in one of my other project and it seems to work wa
 
 2/9/2024
 - Circle thing physics
+- HTML Notes
 
 Implemented the conservaion of momentum into the circle thing project.
-It is way better than previouse physics mechanics. it still feels unnatural and needs more work.
+It is way better than previouse physics mechanics. it still feels a little unnatural and needs more work.
+
+I created a new HTML folder and file for notes on HTML. I added comments, descriptions, and examples for different situations.
+I have common elements that are used and how to use them.
