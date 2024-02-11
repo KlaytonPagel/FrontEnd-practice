@@ -66,3 +66,8 @@ It is way better than previouse physics mechanics. it still feels a little unnat
 
 I created a new HTML folder and file for notes on HTML. I added comments, descriptions, and examples for different situations.
 I have common elements that are used and how to use them.
+
+2/10/2024
+- CSS Notes
+
+Created a file for CSS Notes, I have notes for selectors, colors, backgrounds, borders, positions, and psuedo classes.
