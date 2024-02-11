@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47d10e3b-ba24-449e-89de-aa68d8ce5118" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Notes/css/images/TacoBell.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../canvas_testing/.idea/workspace (1).xml" beforeDir="false" afterPath="$PROJECT_DIR$/../canvas_testing/.idea/workspace (1).xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Notes/css/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Notes/css/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Notes/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/Notes/css/style.css" afterDir="false" />
@@ -40,23 +40,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/pagel/OneDrive/Documents/Saved_Files/GitHub/html-practice/test_page/Notes/css",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pagel/OneDrive/Documents/Saved_Files/GitHub/html-practice/test_page/Notes/css&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pagel\OneDrive\Documents\Saved_Files\GitHub\html-practice\test_page\Notes\css" />
@@ -82,7 +82,9 @@
       <workItem from="1707286451457" duration="5000" />
       <workItem from="1707286514186" duration="26000" />
       <workItem from="1707528572268" duration="6901000" />
-      <workItem from="1707593394017" duration="6519000" />
+      <workItem from="1707593394017" duration="8472000" />
+      <workItem from="1707604975271" duration="3000" />
+      <workItem from="1707608702713" duration="4721000" />
     </task>
     <servers />
   </component>

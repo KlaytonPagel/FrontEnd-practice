@@ -106,16 +106,73 @@ h1 {
     border-top-style: dashed; /*dashed style on just the top side of the border*/
 }
 
+/*Positioning---------------------------------------------------------------------------------------------------------*/
 
+.static { /*Static position is default and flows with HTML*/
+    background-color: blue;
+    position: static; /*Set position with the position key word*/
+    width: 100px; /*Change with and height using px for pixels*/
+    height: 100px;
+}
 
+.absolute { /*Absolute is removed from flow of HTML and is placed at position*/
+    background-color: #66ff00;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 0px; /*set position with top, left, right, or bottom use pc for pixels or % for a percent of parent*/
+    left: 50%;
+}
+.parent { /* a parent class for the relative class below*/
+    background-color: aqua;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 400px;
+    right: 100px;
+}
+.relative { /*relative is positioned at the points relative to it's parent so long as it's parent isn't static*/
+    background-color: #ff0015;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    top: 0px;
+    left: 0px;
+}
+.fixed { /*Fixed is like absolute but not removed from the HTML flow*/
+    background-color: #ffc400;
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    top: 0px;
+    right: 0px;
+}
+.sticky { /*SSticky sticks to your screen when you scroll past it*/
+    background-color: #c800ff;
+    position: sticky;
+    width: 100px;
+    height: 100px;
+}
+/*Pseudo classes------------------------------------------------------------------------------------------------------*/
 
+/*Pseudo classes are a state that effects the element
+for example is your are clicking on something or hovering over it*/
 
+.button {
+    font-size: 18px;
+    width: 200px;
+    height: 100px;
+    background-color: #af7373;
+    border-radius: 25px;
+    border-style: inset;
+}
 
+.button:hover {
+    background-color: #ffc400;
+}
 
-
-
-
-
-
+.button:active{
+    background-color: saddlebrown;
+}
 
 
