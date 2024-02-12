@@ -1,3 +1,4 @@
+/*----------------------------------------Circle----------------------------------------------------------------------*/
 body {
     background-color: black;
 }
@@ -8,11 +9,11 @@ body {
     height: 200px;
     border-radius: 50%;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 25%;
+    left: 25%;
     z-index: 1;
     translate: -50% -50%;
-    animation: pulse 200ms infinite linear;
+    animation: pulse 500ms infinite linear;
 }
 
 .innerred {
@@ -20,7 +21,7 @@ body {
     width: 200px;
     height: 150px;
     z-index: -1;
-    animation: spin 200ms linear infinite;
+    animation: spin 500ms linear infinite;
     box-shadow: 0px 0px 20px #ff0015;
 }
 
@@ -29,7 +30,7 @@ body {
     width: 150px;
     height: 200px;
     z-index: -1;
-    animation: spin 200ms linear infinite;
+    animation: spin 500ms linear infinite;
     box-shadow: 0px 0px 20px #2a4da5;
 }
 
@@ -41,11 +42,60 @@ body {
 
 
 @keyframes pulse {
-    33% {
-        background-color: hsl(226, 100%, 93%);
+    50% {
+        background-color: hsl(268, 100%, 94%);
+        box-shadow: 0px 0px 60px #2a4da5;
+    }
+}
+
+/*-----------------------------------------------Square---------------------------------------------------------------*/
+
+.square {
+    background-color: white;
+    border-radius: 25%;
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+}
+
+.innersquarered {
+    background-color: #ff0015;
+    width: 100px;
+    height: 150px;
+    z-index: -1;transform: translateX(-140px);
+    box-shadow: 0px 0px 50px #ff0015;
+    animation: square 1s linear infinite;
+}
+
+.innersquareblue {
+    background-color: #2a4da5;
+    width: 100px;
+    height: 150px;
+    z-index: -1;transform: translateX(140px);
+    box-shadow: 0px 0px 50px #2a4da5;
+    animation: squareblue 1s linear infinite;
+}
+
+@keyframes square {
+    25%, 75% {
+        height: 200px;
+    }
+    50% {
+        height: 150px;
+        transform: translateX(145px);
     }
 
-    66% {
-        background-color: hsl(0, 100%, 94%);
+}
+
+@keyframes squareblue {
+    25%, 75% {
+        height: 200px;
+    }
+    50% {
+        height: 150px;
+        transform: translateX(-145px);
     }
 }
