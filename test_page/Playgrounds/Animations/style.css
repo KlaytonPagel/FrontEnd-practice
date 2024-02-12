@@ -1,0 +1,51 @@
+body {
+    background-color: black;
+}
+
+.circle {
+    background-color: white;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    translate: -50% -50%;
+    animation: pulse 200ms infinite linear;
+}
+
+.innerred {
+    background-color: #ff0015;
+    width: 200px;
+    height: 150px;
+    z-index: -1;
+    animation: spin 200ms linear infinite;
+    box-shadow: 0px 0px 20px #ff0015;
+}
+
+.innerblue {
+    background-color: #2a4da5;
+    width: 150px;
+    height: 200px;
+    z-index: -1;
+    animation: spin 200ms linear infinite;
+    box-shadow: 0px 0px 20px #2a4da5;
+}
+
+@keyframes spin {
+    to {
+        rotate: 360deg;
+    }
+}
+
+
+@keyframes pulse {
+    33% {
+        background-color: hsl(226, 100%, 93%);
+    }
+
+    66% {
+        background-color: hsl(0, 100%, 94%);
+    }
+}

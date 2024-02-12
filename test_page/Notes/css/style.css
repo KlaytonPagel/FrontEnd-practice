@@ -242,11 +242,26 @@ it will change to that state over the duration time*/
 
 /*You can set percentages to set different states at different percentages of the animation*/
 @keyframes slide2 {
-    0%, 100% {background-color: #ff0015}
-    20% {background-color: #ff9a00}
-    40% {background-color: #ffc400}
-    60% {background-color: #66ff00}
-    80% {background-color: #2c549d}
+    0%, 100% {
+        background-color: #ff0015;
+        box-shadow: 0px 0px 30px #ff0015;
+    }
+    20% {
+        background-color: #ff9a00;
+        box-shadow: 0px 0px 30px #ff9a00;
+    }
+    40% {
+        background-color: #ffc400;
+        box-shadow: 0px 0px 30px #ffc400;
+    }
+    60% {
+        background-color: #66ff00;
+        box-shadow: 0px 0px 30px #66ff00;
+    }
+    80% {
+        background-color: #2c549d;
+        box-shadow: 0px 0px 30px #2c549d;
+    }
 }
 
 .animation1 {
