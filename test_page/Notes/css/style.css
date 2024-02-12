@@ -152,6 +152,8 @@ h1 {
     position: sticky;
     width: 100px;
     height: 100px;
+    top: 100px;
+    transform: translateX(500px);
 }
 /*Pseudo classes------------------------------------------------------------------------------------------------------*/
 
@@ -204,6 +206,8 @@ it will change to that state over the duration time*/
     height: 100px;
     border-radius: 25px;
     transition-duration: 500ms; /* set duration time*/
+    transition-delay: 100ms; /*Sets a delay to start the transition*/
+    transition-timing-function: ease; /*Sets the timing of the transition*/
 }
 
 .transition1:hover { /*change the background color and width when hovered*/
@@ -221,13 +225,44 @@ it will change to that state over the duration time*/
     translate: 50px;
 }
 
+/*Animations----------------------------------------------------------------------------------------------------------*/
+/*Animations are ways tp add more advanced animations to elements*/
 
 
+/*To make an animation you declare it with @keyframes then give it a name*/
+@keyframes slide {
+    from { /*You can set a starting point adding any attributes to it*/
+        transform: translateX(700px);
+    }
 
+    to { /*to is the ending point, the state the element will be in at the end of the animation*/
+        transform: translateX(0px);
+    }
+}
 
+/*You can set percentages to set different states at different percentages of the animation*/
+@keyframes slide2 {
+    0%, 100% {background-color: #ff0015}
+    20% {background-color: #ff9a00}
+    40% {background-color: #ffc400}
+    60% {background-color: #66ff00}
+    80% {background-color: #2c549d}
+}
 
+.animation1 {
+    animation-name: slide; /*Declare name of the animation*/
+    animation-duration: 1s; /*How long the animation will last*/
+    animation-timing-function: ease-in; /*The timing style of the animation*/
+    animation-delay: 0s; /*How long it will wait to run the animation*/
+    animation-iteration-count: 1; /*how many times it will run the animation*/
+    animation-direction: normal; /*what frame the animation will start on*/
 
+    animation: slide 3s ease-in 0s 1 normal; /*combine all above lines into one line*/
+}
 
+.animation2 {
+    animation: slide2 4s infinite; /*animation runs infinitely*/
+}
 
 
 
