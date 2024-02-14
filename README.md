@@ -71,3 +71,13 @@ I have common elements that are used and how to use them.
 - CSS Notes
 
 Created a file for CSS Notes, I have notes for selectors, colors, backgrounds, borders, positions, and psuedo classes.
+
+2/11/2024
+-CSS Notes
+
+Finished my CSS notes for now. I may add more to it as I find new things. Added traansitions and animations to the CSS Notes
+
+2/12/2024
+-CSS Animations
+
+Played around with the CSS Animations. Made a couple of animations for a circle and a rectangle with a spinning glowing animation behind it
