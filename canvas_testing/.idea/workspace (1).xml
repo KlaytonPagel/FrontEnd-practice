@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="49c1353a-41eb-4fc9-b52c-cde159ea6ceb" name="Changes" comment="" />
+    <list default="true" id="a370ada4-2575-4c8d-b7e0-2f8387fd5e12" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Simulations/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main_site/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../main_site/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main_site/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../main_site/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,33 +14,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
-  <component name="ProjectId" id="2bprlC0DXXF33aN5GztSYdAanKl" />
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2bpsCJxk3mJOJ9uXEZScm0ljXGP" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "G:/Other computers/My Laptop/Saved_Files/GitHub/html-practice/Simulations",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pagel/OneDrive/Documents/Saved_Files/GitHub/html-practice/canvas_testing&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="49c1353a-41eb-4fc9-b52c-cde159ea6ceb" name="Changes" comment="" />
-      <created>1706923009671</created>
+      <changelist id="a370ada4-2575-4c8d-b7e0-2f8387fd5e12" name="Changes" comment="" />
+      <created>1706923225373</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1706923009671</updated>
-      <workItem from="1706923010654" duration="294000" />
+      <updated>1706923225373</updated>
+      <workItem from="1706923226373" duration="5000" />
+      <workItem from="1707080107715" duration="13000" />
     </task>
     <servers />
   </component>
