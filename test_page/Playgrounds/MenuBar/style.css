@@ -13,3 +13,20 @@ body {
     width: 10%;
     border-radius: 15px;
 }
+
+.menu_bar_button {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+.menu_bar_button:active ~ .menu_bar {
+    animation: menu_bar_open 1s linear forwards;
+}
+
+@keyframes menu_bar_open {
+    100% {
+        background-color: #ff0015;
+        width: 1000px;
+    }
+}
