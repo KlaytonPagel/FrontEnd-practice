@@ -2,17 +2,16 @@ body {
     background-color: black;
 }
 
-.circle {
+#bigA {
     position: absolute;
     background-color: aqua;
-    width: 100px;
-    height: 100px;
     border-radius: 30%;
+    transform: rotate(-40deg);
     animation: infinite move linear forwards 1s ;
 }
 
 @keyframes move {
-    to {
-        transform: rotate(360deg);
+    50% {
+        transform: rotate(40deg);
     }
 }
