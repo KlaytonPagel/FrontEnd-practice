@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+}
+
+.circle {
+    position: absolute;
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    border-radius: 30%;
+    animation: infinite move linear forwards 1s ;
+}
+
+@keyframes move {
+    to {
+        transform: rotate(360deg);
+    }
+}
