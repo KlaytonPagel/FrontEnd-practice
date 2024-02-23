@@ -4,8 +4,8 @@ screenHeight = 500
 document.body.style.width = screenWidth + "px"
 document.body.style.height = screenHeight + "px"
 
-width = 50
-height = 100
+width = 100
+height = 50
 
 bigA.style.width = width + "px"
 bigA.style.height = height + "px"
