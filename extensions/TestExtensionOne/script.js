@@ -1,16 +1,16 @@
-screenWidth = 700
-screenHeight = 500
+const screenWidth = 700
+const screenHeight = 500
 
 document.body.style.width = screenWidth + "px"
 document.body.style.height = screenHeight + "px"
 
-width = 100
-height = 50
+const width = 100
+const height = 50
+
+const bigA = document.getElementById("bigA")
 
 bigA.style.width = width + "px"
 bigA.style.height = height + "px"
-
-bigA = document.getElementById("bigA")
 
 class BigA {
     constructor() {
