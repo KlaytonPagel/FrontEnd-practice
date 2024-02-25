@@ -17,14 +17,13 @@ document.body.appendChild(script);})();
 ">Bookmarklet
 </a>
 
+<br>
 
 <!--Runs the code directly from the Href, Don't Forget ";"------------------------------------------------------------->
 <a href="javascript:
 (function (){
-let paragraphs = document.getElementsByClassName('main');
-for (let index = 0; index < paragraphs.length; index++){paragraphs[index].style.backgroundColor = '#13bff5';
-paragraphs[index].style.width = '100px';
-paragraphs[index].style.height = '100px';
+let paragraphs = document.getElementsByTagName('body');
+for (let index = 0; index < paragraphs.length; index++){paragraphs[index].style.backgroundColor = '#424242';
 alert('changed');
 }
 })();
