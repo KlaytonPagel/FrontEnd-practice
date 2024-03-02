@@ -99,15 +99,15 @@ class Circle {
         this.draw();
     }
 }
-let maxSize = 75;
+let maxSize = 100;
 let xSpots = Math.floor(width / maxSize);
 let ySpots = Math.floor(height / maxSize);
 for (let x = 1; x <= xSpots; x++) {
     for (let y = 1; y <= ySpots; y++) {
         let size = 100 * Math.random();
         let chance = Math.random()
-        if (chance > .5) {
-                objects.push(new Circle(pen, x * maxSize, y * maxSize, 1, size / 2));
+        if (chance > 0) {
+                objects.push(new Circle(pen, x * maxSize - maxSize/2, y * maxSize - maxSize/2, Math.random() + .5, size / 2));
         }
     }
 }
