@@ -12,7 +12,7 @@
     for (let item = 0; item < elements.length; item++) {
         let element = elements[item];
         for (let index = 0; index < element.length; index++) {
-            element[index].style.backgroundColor ='#424242';
+            element[index].style.backgroundColor ='#212121';
             element[index].style.color = '#d0d0d0';
         }
     }
